@@ -95,7 +95,7 @@ class Symmetric:
         cipher = Cipher(algorithms.TripleDES(self.__key), modes.CBC(iv))
         encryptor = cipher.encryptor()
         c_text = encryptor.update(padded_text) + encryptor.finalize()
-        with open ("iv.txt", "wb") as file:
+        with open ("./files/iv.txt", "wb") as file:
             file.write(iv)
         logging.info("Text is encrypted with symmetric algorithm")
         return c_text
@@ -109,7 +109,7 @@ class Symmetric:
         Returns:
             bytes: decrypted text in bytes
         """
-        with open("iv.txt", 'rb') as file:
+        with open("./files/iv.txt", 'rb') as file:
             iv = file.read()
         cipher = Cipher(algorithms.TripleDES(self.__key), modes.CBC(iv))
         decryptor = cipher.decryptor()
