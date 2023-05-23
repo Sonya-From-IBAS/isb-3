@@ -2,7 +2,7 @@ import sys
 import logging
 
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives.serialization import load_pem_private_key
+from cryptography.hazmat.primitives.serialization import load_pem_private_key, load_pem_public_key
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
@@ -13,7 +13,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 class Asymmetric:
     """
-    Class for working with asymmetric encryption alg
+    Class for working with asymmetric alg
     """
 
     def __init__(self) -> None:
@@ -32,7 +32,7 @@ class Asymmetric:
         self.__publicKey = keys.public_key()
         logging.info("Asymmetric keys was generated")
 
-    def privateKeyDeserialization(self, fileName: str) -> None:
+    def secretKeyDeserialization(self, fileName: str) -> None:
         """
         Func that loads secret key from file
 
@@ -47,6 +47,22 @@ class Asymmetric:
             logging.info("Secret key is loaded")
         except OSError as error:
             logging.warning("Secret key is not loaded")
+            sys.exit(error)
+    
+    def publicKeyDeserialization(self, fileName: str) -> None:
+        """
+        Func that loads public key from file
+        Args:
+            fileName (str): name of .pem file
+        """
+        try:
+            with open(fileName, "rb") as file:
+                public_bytes = file.read()
+                self.__secretKey = load_pem_public_key(
+                public_bytes, password=None)
+            logging.info("Public key is loaded")
+        except OSError as error:
+            logging.warning("Public key is not loaded")
             sys.exit(error)
 
     def keysSerialization(self, secretKeyFileName: str, publicKeyFileName: str) -> None:

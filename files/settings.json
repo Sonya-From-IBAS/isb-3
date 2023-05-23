@@ -2,7 +2,7 @@
     "initialFile":"./files/initialFile.txt",
     "encryptedFile":"./files/encryptedFile.txt",
     "decryptedFile":"./files/decryptedFile.txt",
-    "symmericKey":"./files/symmericKey.txt",
+    "symmetricKey":"./files/symmetricKey.txt",
     "publicKey":"./files/publicKey.pem",
     "secretKey":"./files/secretKey.pem"
 }
