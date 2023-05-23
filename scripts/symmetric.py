@@ -89,7 +89,6 @@ class Symmetric:
         Returns:
             bytes: encrypted text in bytes
         """
-        logging.info(f"self.__len is {self.__len}")
         padder = padding.ANSIX923(self.__len*8).padder()
         padded_text = padder.update(text)+padder.finalize()
         iv = os.urandom(8)
@@ -112,7 +111,6 @@ class Symmetric:
         """
         with open("iv.txt", 'rb') as file:
             iv = file.read()
-        logging.info(f"self.__len is {self.__len}")
         cipher = Cipher(algorithms.TripleDES(self.__key), modes.CBC(iv))
         decryptor = cipher.decryptor()
         dc_text = decryptor.update(text) + decryptor.finalize()
