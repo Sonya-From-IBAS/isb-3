@@ -13,7 +13,7 @@ class Text:
         """
         self.__text = None
     
-    def getText(self)->bytes:
+    def get_text(self)->bytes:
         """
         Getter
 
@@ -22,7 +22,7 @@ class Text:
         """
         return self.__text
     
-    def setText(self, text:bytes)->None:
+    def set_text(self, text:bytes)->None:
         """
             setter
         Args:
@@ -30,7 +30,7 @@ class Text:
         """
         self.__text = text
 
-    def textSerialization(self, fileName:str)->None:
+    def text_serialization(self, file_name:str)->None:
         """
         Funs that writes text in file
 
@@ -38,24 +38,26 @@ class Text:
             text (str): name of file
         """
         try:
-            with open(fileName, "wb") as file:
+            with open(file_name, "wb") as file:
                 file.write(self.__text)
             logging.info("Text is saved")
         except OSError as error:
             logging.warning("Text is not saved")
             sys.exit(error)
 
-    def textDeserialization(self, fileName:str)->None:
+    def text_deserialization(self, file_name:str)->None:
         """
         Func that reads text from file
 
         Args:
-            fileName (str): name of file
+            file_name (str): name of file
         """
         try:
-            with open(fileName, "rb") as file:
+            with open(file_name, "rb") as file:
                 self.__text = file.read()
             logging.info("Text is loaded from file")
         except OSError as error:
             logging.warning("Text is not loaded from file")
             sys.exit(error)
+        
+    txt = property(get_text, set_text)
