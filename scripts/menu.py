@@ -112,7 +112,6 @@ def menu()->None:
     group.add_argument("-dec", "--decryption",  help="Запускает режим дешифрования")
     args = parser.parse_args()
     settings = load_settings(args.path)
-    # settings["keyLen"] = int(args.len)
 
     if args.generation is not None:
         symmetric = Symmetric()
@@ -130,5 +129,4 @@ def menu()->None:
         text = Text()
         symmetric = Symmetric()
         asymmetric = Asymmetric() 
-        print(settings)
         decryption_action(text, symmetric, asymmetric, settings)

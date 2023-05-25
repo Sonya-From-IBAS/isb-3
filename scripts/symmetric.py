@@ -26,22 +26,13 @@ class Symmetric:
         else:
             logging.warning("Symmeric key is not generated. key_lenght is not correct")
             sys.exit("Try again")
-
-    def get_key(self)->bytes:
-        """
-            Getter
-        Returns:
-            bytes: returns key value
-        """
+    @property
+    def sym(self):
         return self.__key
-    
-    def set_key(self, key: bytes)->None:
-        """
-            Setter
-        Args:
-            key (bytes): set key value
-        """
-        self.__key = key
+    @sym.setter
+    def key(self, value):
+        self.__key = value
+        
 
     def key_deserialization(self, file_name: str)->None:
         """
@@ -117,5 +108,3 @@ class Symmetric:
         unpadded_dc_text = unpadder.update(dc_text) + unpadder.finalize()
         logging.info("Text is decrypted with symmetric algorithm")
         return unpadded_dc_text
-    
-    sym = property(get_key, set_key)
